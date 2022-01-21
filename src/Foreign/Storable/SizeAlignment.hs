@@ -6,7 +6,7 @@
 {-# OPTIONS_GHC -Wall -fno-warn-tabs -fno-warn-orphans #-}
 
 module Foreign.Storable.SizeAlignment (
-	wholeSizeAlignment, offsetUntil,
+	wholeSizeAlignment, offsetOf,
 	module Foreign.Storable.SizeAlignment.Internal, Offset ) where
 
 import Foreign.Storable.SizeAlignment.Internal
@@ -27,8 +27,8 @@ calcWholeSize = foldl next 0 . rotateAlignmentL
 
 type Offset = Int
 
-offsetUntil :: forall t ts . SizeAlignmentListUntil t ts => Offset
-offsetUntil = calcOffset $ sizeAlignmentListUntil @t @ts
+offsetOf :: forall t ts . SizeAlignmentListUntil t ts => Offset
+offsetOf = calcOffset $ sizeAlignmentListUntil @t @ts
 
 calcOffset :: [SizeAlignment] -> Offset
 calcOffset = foldl next 0 . shiftAlignmentL
