@@ -21,10 +21,13 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- template-haskell
 
 library:
   source-dirs: src
-  exposed-modules: Foreign.Storable.SizeAlignment
+  exposed-modules:
+  - Foreign.Storable.SizeAlignment
+  - Foreign.Storable.SizeAlignment.TH
 
 tests:
   size-alignment-list-test:
