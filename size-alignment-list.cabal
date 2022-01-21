@@ -25,25 +25,16 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
+      Foreign.Storable.SizeAlignment
   other-modules:
+      Data.Type.TypeFam
+      Data.Type.TypeValMap
+      GHC.Generics.TypeFam
       Paths_size_alignment_list
   hs-source-dirs:
       src
   build-depends:
       base >=4.7 && <5
-  default-language: Haskell2010
-
-executable size-alignment-list-exe
-  main-is: Main.hs
-  other-modules:
-      Paths_size_alignment_list
-  hs-source-dirs:
-      app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
-  build-depends:
-      base >=4.7 && <5
-    , size-alignment-list
   default-language: Haskell2010
 
 test-suite size-alignment-list-test
