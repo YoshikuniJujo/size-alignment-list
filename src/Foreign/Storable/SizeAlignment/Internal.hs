@@ -29,18 +29,22 @@ class SizeAlignmentList a where
 	sizeAlignmentList :: [SizeAlignment]
 
 	default sizeAlignmentList :: (
-		Generic a,
 		MapTypeVal2 Storable (Flatten (Rep a)) ) => [SizeAlignment]
 	sizeAlignmentList = sizeAlignmentTypeList @(Flatten (Rep a))
 
+sizeAlignmentTypeMaybeList ::
+	forall (mas :: Maybe [Type]) . MapTypeValMaybe2 Storable mas =>
+	Maybe [SizeAlignment]
+sizeAlignmentTypeMaybeList =
+	mapTypeValMaybe2 @Storable @mas (\x -> (sizeOf x, alignment x))
+
 class SizeAlignmentListUntil t a where
-	sizeAlignmentListUntil :: [SizeAlignment]
+	sizeAlignmentListUntil :: Maybe [SizeAlignment]
 
 	default sizeAlignmentListUntil :: (
-		Generic a,
-		MapTypeVal2 Storable (FromJust (Until t (Flatten (Rep a)))) ) =>
-		[SizeAlignment]
+		MapTypeValMaybe2 Storable (Until t (Flatten (Rep a))) ) =>
+		Maybe [SizeAlignment]
 	sizeAlignmentListUntil =
-		sizeAlignmentTypeList @(FromJust (Until t (Flatten (Rep a))))
+		sizeAlignmentTypeMaybeList @(Until t (Flatten (Rep a)))
 
-type MapStorableUntil t ts = MapTypeVal2 Storable (FromJust (Until t (Flatten (Rep ts))))
+type MapStorableUntil t ts = MapTypeValMaybe2 Storable (Until t (Flatten (Rep ts)))

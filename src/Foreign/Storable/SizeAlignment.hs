@@ -27,8 +27,8 @@ calcWholeSize = foldl next 0 . rotateAlignmentL
 
 type Offset = Int
 
-offsetOf :: forall t ts . SizeAlignmentListUntil t ts => Offset
-offsetOf = calcOffset $ sizeAlignmentListUntil @t @ts
+offsetOf :: forall t ts . SizeAlignmentListUntil t ts => Maybe Offset
+offsetOf = calcOffset <$> sizeAlignmentListUntil @t @ts
 
 calcOffset :: [SizeAlignment] -> Offset
 calcOffset = foldl next 0 . shiftAlignmentL
