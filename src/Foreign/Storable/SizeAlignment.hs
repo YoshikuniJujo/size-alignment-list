@@ -11,5 +11,5 @@ module Foreign.Storable.SizeAlignment (
 import Foreign.Storable.SizeAlignment.Internal
 import Foreign.Storable.SizeAlignment.TH
 
-instanceSizeAlignmentListTuple `mapM` [2 .. 7]
-instanceSizeAlignmentListUntilTuple `mapM` [2 .. 7]
+concat <$> instanceSizeAlignmentListTuple `mapM` [2 .. 7]
+concat <$> instanceSizeAlignmentListUntilTuple `mapM` [2 .. 7]
