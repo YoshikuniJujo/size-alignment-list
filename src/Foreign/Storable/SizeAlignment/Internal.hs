@@ -43,4 +43,4 @@ class SizeAlignmentListUntil t a where
 	sizeAlignmentListUntil =
 		sizeAlignmentTypeList @(FromJust (Until t (Flatten (Rep a))))
 
-type MapStorableUntil t ts = MapTypeVal2 Storable (FromJust (Until t ts))
+type MapStorableUntil t ts = MapTypeVal2 Storable (FromJust (Until t (Flatten (Rep ts))))

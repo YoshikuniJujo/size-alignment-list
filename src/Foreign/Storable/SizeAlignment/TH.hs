@@ -34,8 +34,8 @@ instanceSizeAlignmentListUntilTuple n =
 		let	tpl = tupT ts
 		(isInstance ''SizeAlignmentListUntil . (: []) =<< tpl) >>= bool
 			((: []) <$> instanceD
-				(cxt [conT ''MapStorableUntil `appT`
-					varT t `appT` promotedListT ts])
+				(cxt [conT ''MapStorableUntil `appT` varT t `appT` tpl])
+--					varT t `appT` promotedListT ts])
 				(conT ''SizeAlignmentListUntil `appT`
 					varT t `appT` tpl) [])
 			(pure [])
