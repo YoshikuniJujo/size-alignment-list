@@ -12,8 +12,8 @@ module Foreign.Storable.SizeAlignment (
 import Foreign.Storable.SizeAlignment.Internal
 import Foreign.Storable.SizeAlignment.TH
 
-concat <$> instanceSizeAlignmentListTuple `mapM` [2 .. 7]
-concat <$> instanceSizeAlignmentListUntilTuple `mapM` [2 .. 7]
+concat <$> instanceSizeAlignmentListTuple `mapM` filter (/= 1) [0 .. 7]
+concat <$> instanceSizeAlignmentListUntilTuple `mapM` filter (/= 1) [0 .. 7]
 
 wholeSizeAlignment :: forall a . SizeAlignmentList a => SizeAlignment
 wholeSizeAlignment = let sas = sizeAlignmentList @a in
