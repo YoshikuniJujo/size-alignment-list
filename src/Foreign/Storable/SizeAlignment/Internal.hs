@@ -26,7 +26,8 @@ minimumAlignment = 256
 
 sizeAlignmentTypeList ::
 	forall (as :: [Type]) . MapTypeVal2 Storable as => [SizeAlignment]
-sizeAlignmentTypeList = mapTypeVal2 @Storable @as (\x -> (sizeOf x, lcm minimumAlignment $ alignment x))
+-- sizeAlignmentTypeList = mapTypeVal2 @Storable @as (\x -> (sizeOf x, lcm minimumAlignment $ alignment x))
+sizeAlignmentTypeList = mapTypeVal2 @Storable @as (\x -> (sizeOf x, alignment x))
 
 class SizeAlignmentList a where
 	sizeAlignmentList :: [SizeAlignment]
@@ -39,7 +40,7 @@ sizeAlignmentTypeMaybeList ::
 	forall (mas :: Maybe [Type]) . MapTypeValMaybe2 Storable mas =>
 	Maybe [SizeAlignment]
 sizeAlignmentTypeMaybeList =
-	mapTypeValMaybe2 @Storable @mas (\x -> (sizeOf x, lcm minimumAlignment $ alignment x))
+	mapTypeValMaybe2 @Storable @mas (\x -> (sizeOf x, alignment x))
 
 class SizeAlignmentListUntil t a where
 	sizeAlignmentListUntil :: Maybe [SizeAlignment]
