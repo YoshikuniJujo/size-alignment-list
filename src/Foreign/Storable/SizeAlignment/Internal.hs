@@ -21,9 +21,12 @@ type Size = Int
 type Alignment = Int
 type SizeAlignment = (Size, Alignment)
 
+minimumAlignment :: Int
+minimumAlignment = 256
+
 sizeAlignmentTypeList ::
 	forall (as :: [Type]) . MapTypeVal2 Storable as => [SizeAlignment]
-sizeAlignmentTypeList = mapTypeVal2 @Storable @as (\x -> (sizeOf x, alignment x))
+sizeAlignmentTypeList = mapTypeVal2 @Storable @as (\x -> (sizeOf x, lcm minimumAlignment $ alignment x))
 
 class SizeAlignmentList a where
 	sizeAlignmentList :: [SizeAlignment]
