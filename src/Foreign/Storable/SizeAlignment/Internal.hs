@@ -39,7 +39,7 @@ sizeAlignmentTypeMaybeList ::
 	forall (mas :: Maybe [Type]) . MapTypeValMaybe2 Storable mas =>
 	Maybe [SizeAlignment]
 sizeAlignmentTypeMaybeList =
-	mapTypeValMaybe2 @Storable @mas (\x -> (sizeOf x, alignment x))
+	mapTypeValMaybe2 @Storable @mas (\x -> (sizeOf x, lcm minimumAlignment $ alignment x))
 
 class SizeAlignmentListUntil t a where
 	sizeAlignmentListUntil :: Maybe [SizeAlignment]
