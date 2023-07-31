@@ -1,11 +1,11 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.34.4.
+-- This file has been generated from package.yaml by hpack version 0.35.2.
 --
 -- see: https://github.com/sol/hpack
 
 name:           size-alignment-list
-version:        0.1.0.0
+version:        0.1.0.1
 description:    Please see the README on GitHub at <https://github.com/githubuser/size-alignment-list#readme>
 homepage:       https://github.com/githubuser/size-alignment-list#readme
 bug-reports:    https://github.com/githubuser/size-alignment-list/issues
@@ -38,6 +38,7 @@ library
   build-depends:
       base >=4.7 && <5
     , template-haskell
+    , try-storable-peek-poke
   default-language: Haskell2010
 
 test-suite size-alignment-list-test
@@ -52,4 +53,5 @@ test-suite size-alignment-list-test
       base >=4.7 && <5
     , size-alignment-list
     , template-haskell
+    , try-storable-peek-poke
   default-language: Haskell2010

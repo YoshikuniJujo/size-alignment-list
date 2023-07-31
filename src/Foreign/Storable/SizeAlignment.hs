@@ -1,5 +1,6 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE ScopedTypeVariables, TypeApplications #-}
+{-# LANGUAGE MonoLocalBinds #-}
 {-# LANGUAGE DataKinds, ConstraintKinds #-}
 {-# LANGUAGE MultiParamTypeClasses, AllowAmbiguousTypes #-}
 {-# LANGUAGE FlexibleContexts, FlexibleInstances, UndecidableInstances #-}
@@ -12,8 +13,8 @@ module Foreign.Storable.SizeAlignment (
 import Foreign.Storable.SizeAlignment.Internal
 import Foreign.Storable.SizeAlignment.TH
 
-concat <$> instanceSizeAlignmentListTuple `mapM` filter (/= 1) [0 .. 7]
-concat <$> instanceSizeAlignmentListUntilTuple `mapM` filter (/= 1) [0 .. 7]
+concat <$> instanceSizeAlignmentListTuple `mapM` filter (/= 1) [0 .. 15]
+concat <$> instanceSizeAlignmentListUntilTuple `mapM` filter (/= 1) [0 .. 15]
 
 wholeSizeAlignment :: forall a . SizeAlignmentList a => SizeAlignment
 wholeSizeAlignment = let sas = sizeAlignmentList @a in

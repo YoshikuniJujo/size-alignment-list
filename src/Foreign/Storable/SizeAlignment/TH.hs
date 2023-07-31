@@ -6,7 +6,7 @@ module Foreign.Storable.SizeAlignment.TH (
 	instanceSizeAlignmentListUntilTuple ) where
 
 import Language.Haskell.TH
-import Foreign.Storable
+import Foreign.Storable.PeekPoke
 import Foreign.Storable.SizeAlignment.Internal
 import Data.Bool
 
@@ -15,7 +15,7 @@ instanceSizeAlignmentListTuple n = newTypes n >>= \ts -> do
 	let	tpl = tupT ts
 	(isInstance ''SizeAlignmentList . (: []) =<< tpl) >>= bool
 		((: []) <$> instanceD
-			(cxt $ (conT ''Storable `appT`) <$> ts)
+			(cxt $ (conT ''Sizable `appT`) <$> ts)
 			(conT ''SizeAlignmentList `appT` tpl) [])
 		(pure [])
 
@@ -34,11 +34,8 @@ instanceSizeAlignmentListUntilTuple n =
 		let	tpl = tupT ts
 		(isInstance ''SizeAlignmentListUntil . (: []) =<< tpl) >>= bool
 			((: []) <$> instanceD
-				(cxt [conT ''MapStorableUntil `appT` varT t `appT` tpl])
+				(cxt [conT ''MapSizableUntil `appT` varT t `appT` tpl])
 --					varT t `appT` promotedListT ts])
 				(conT ''SizeAlignmentListUntil `appT`
 					varT t `appT` tpl) [])
 			(pure [])
-
-promotedListT :: [TypeQ] -> TypeQ
-promotedListT = foldr (\p ps -> promotedConsT `appT` p `appT` ps) promotedNilT
